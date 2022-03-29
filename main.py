@@ -23,8 +23,9 @@ def main():
     posts = get_current_user_posts_number()
     followers = get_current_user_followers_number()
     following = get_current_user_following_number()
+    followers_list = [] #get_followers_list()
     # user instance
-    user = User(posts, followers, following)
+    user = User(posts, followers, following, followers_list)
     print_purple(f"number of {USER} posts. {user.posts} posts")
     print_cyan(f"number of {USER} followers. {user.followers} followers")
     print_yellow(f"number of {USER} following. {user.following} following")

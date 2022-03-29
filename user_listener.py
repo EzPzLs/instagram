@@ -3,12 +3,14 @@ from user_info import *
 
 
 def check_for_change(user):
+    count = 0
     while True:
         check_for_followers_change(user)
         sleep(10)
+        count += 10
+        print(count)
 
 
-# lol
 def grammar_check(difference):
     if difference > 1:
         return "s"
@@ -26,8 +28,13 @@ def check_for_followers_change(user):
     plural = grammar_check(difference)
     if current_followers > last_time_checked_followers:
         print_cyan(f"You got {difference} new follower{plural} since the last check!")
+        check_who_followed(difference)
     elif current_followers < last_time_checked_followers:
         print_yellow(f"You lost {difference} new follower{plural} since the last check!")
     else:
-        print_light_purple("No changes since last check")
+        print_light_purple("No changes since the last check")
     user.set_followers(current_followers)
+
+
+def check_who_unfollowed():
+    pass

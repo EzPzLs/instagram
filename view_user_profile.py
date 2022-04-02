@@ -18,9 +18,10 @@ def site_login(username, password):
     username_input.send_keys(username)
     password_input.send_keys(password)
     login_button.click()
+    check_login(username, password)
 
 
-def check_login():
+def check_login(username, password):
     sleep(2)
     error = driver.find_elements(By.CSS_SELECTOR, "p[id='slfErrorAlert']")
     if len(error) == 0:
@@ -28,25 +29,13 @@ def check_login():
         return
     else:
         print_red("login failed, bad internet connection :(")
-        driver.close()
-        exit()
-    """
-        try:
-        sleep(2)
-        # check if there is an Error in the html, if there isn`t, just stop the function
-        driver.find_elements(By.CSS_SELECTOR, "p[id='slfErrorAlert']")
-    except:
-        print_green("we good bro, no internet failure :)")
-        return
-    print_red("login failed, bad internet connection :(")
-    driver.close()
-    exit()
-    """
+        print_yellow("lets try again")
+        site_login(username, password)
 
 
-def enter_user_profile(user):
+def enter_user_profile(username):
     check_for_net_error()
-    driver.get(URL + user)
+    driver.get(URL + username)
 
 
 def check_for_net_error():
